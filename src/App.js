@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useMemo } from "react";
 
 function App() {
+  const [counterOne, setcounterOne] = useState(0);
+  const [counterTwo, setcounterTwo] = useState(0);
+
+  const IncrementOne = () => {
+    setcounterOne(counterOne + 1);
+  };
+
+  const IncrementTwo = () => {
+    setcounterTwo(counterTwo + 1);
+  };
+
+  const isEven = useMemo(() => {
+    console.warn("----");
+    let i = 0;
+    while (i < 500000000) {
+      i++;
+    }
+    return counterOne % 2 == 0;
+  }, [counterOne]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={IncrementOne}>Counter one-{counterOne}</button>
+      <br />
+      <span>{isEven ? "Even" : "Odd"} </span>
+      <br />
+      <button onClick={IncrementTwo}>Counter two-{counterTwo}</button>
     </div>
   );
 }
